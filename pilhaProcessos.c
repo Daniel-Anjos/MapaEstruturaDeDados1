@@ -11,6 +11,7 @@ struct processo{
 
 struct processo fila;
 int opMenu;
+int ini, fim;
 
 void menuPrincipal();
 void adicionaProcesso();
@@ -28,8 +29,12 @@ while (opMenu != 0){
 }
 
 void adicionaProcesso(nomeProcesso){
+    if (ini == fim){
+        printf ("Desculpe, a pilha está lotada. Remova algum processo ou execute a limpeza.");
+    }else{
     printf("Informe o nome do processo a ser enfileirado: \n");
     scanf("%d", &nomeProcesso);
+    }
 }
 
 void menuPrincipal(){
