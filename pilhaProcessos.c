@@ -27,6 +27,8 @@ void mostrarPilha();
 int main (){
     setlocale (LC_ALL, "Portuguese");
 int opMenu;
+pilha.topo = 0;
+pilha.ini = 0;
 while (opMenu != 0){
     mostrarPilha();
     menuPrincipal();
@@ -37,14 +39,16 @@ while (opMenu != 0){
         break;
     case 2:
         removeProcesso();
+        break;
     case 3:
         limparPilha();
+        break;
     default:
         printf("Opção Inválida, tente novamente");
         system("pause");
         break;
     }
-};
+    };
 }
 
 void adicionaProcesso(processo elemento){
@@ -56,7 +60,7 @@ void adicionaProcesso(processo elemento){
         scanf("%s", &elemento.nomeProcesso);
         fflush(stdin);
         //lembrar de substituir esta declaração por uma função que gere números randômicos
-        elemento.PID += 15;
+        elemento.PID += 1;
         pilha.dados[pilha.topo] = elemento;
         pilha.topo ++;
     }
@@ -83,8 +87,9 @@ void limparPilha(){
 void mostrarPilha(){
     int i;
     for(i=0; i < tamanho; i++){
-        printf("%d PID: ", "%s Processo: \n", pilha.dados[i].PID, pilha.dados[i].nomeProcesso);
+        printf("PID: %d - Processo: %s \n", pilha.dados[pilha.ini].PID, pilha.dados[pilha.ini].nomeProcesso);
     }
+    system("pause");
 }
 
 void menuPrincipal(){
