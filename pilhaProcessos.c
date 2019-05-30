@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<locale.h>
 #include<string.h>
+#include<time.h>
 
 #define tamanho 5
 
@@ -23,10 +24,12 @@ void adicionaProcesso();
 processo removeProcesso();
 void limparPilha();
 void mostrarPilha();
+int geraPid();
 
 int main (){
     setlocale (LC_ALL, "Portuguese");
 int opMenu;
+opMenu = 4;
 pilha.topo = 0;
 pilha.ini = 0;
 while (opMenu != 0){
@@ -66,8 +69,7 @@ void adicionaProcesso(processo elemento){
         printf("Informe o nome do processo a ser enfileirado: \n");
         scanf("%s", &elemento.nomeProcesso);
         fflush(stdin);
-        //lembrar de substituir esta declaração por uma função que gere números randômicos
-        elemento.PID = pilha.topo + 1051;
+        elemento.PID = geraPid();
         pilha.dados[pilha.topo] = elemento;
         pilha.topo ++;
         printf("\nProcesso adicionado com Sucesso. \n\n");
@@ -101,8 +103,12 @@ void mostrarPilha(){
         printf("Não existem Processos na Pilha. \n");
     }else {
         for(i=0; i < pilha.topo; i++){
+        	if (i == pilha.topo-1){
+      			printf("PID: %d - Processo: %s -> Topo \n", pilha.dados[i].PID, pilha.dados[i].nomeProcesso);  		
+			}else{
             printf("PID: %d - Processo: %s \n", pilha.dados[i].PID, pilha.dados[i].nomeProcesso);
         }
+    }
     }
 }
 
@@ -112,4 +118,12 @@ void menuPrincipal(){
     printf("\n 2 - Remover processo da pilha \n");
     printf("\n 3 - Esvaziar a pilha \n");
     printf("\n 0 - Sair do Programa \n");
+}
+
+//Função para gerar PID's aleatórios
+int geraPid(){
+	int valorPid;
+	srand(time(NULL));
+	valorPid = 1000 + (rand() % 5000);
+	return valorPid;
 }
